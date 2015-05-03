@@ -47,11 +47,25 @@ class IndexController extends AbstractActionController
     //	$this->processAction()
     	if ($this->request->isPost()) {
     	
-    		return $this->redirect()->toRoute(NULL ,
-    				array( 'controller' => 'Index',
-    						'action' =>  'confirm'
-    				));
+    		return $this->redirect()->toRoute(NULL ,array( 'controller' => 'Index',	'action' =>  'confirm'));
     	}
+   else 
+   {
+   	//$viewModel  = new ViewModel();
+   	//$viewModel=array('havij'=>'NOT POST');
+   	//return $viewModel;
+   	return $this->redirect()->toRoute(NULL ,array( 'controller' => 'Index',	'action' =>  'index'));
+   //	$model = new ViewModel(array(
+   			
+   			// 				'error' => true,
+   			// 				'form'  => $form,
+   				//		'havij'=>'NOT POST',
+   				//	));
+   				//	$model->setTemplate('Form/index/index');
+   	//		 		return $model;
+   	//return array('havij'=>'NOT POST');
+   	
+   }
    // 	$post = $this->request->getPost();
   //  	$form = new RegisterForm();
     //	$inputFilter = new RegisterFilter();
