@@ -37,6 +37,7 @@ class IndexController extends AbstractActionController
      	$resultSetPrototype->setArrayObjectPrototype(new \Form\Model\User);
     	$tableGateway = new \Zend\Db\TableGateway\TableGateway('user',$dbAdapter, null, $resultSetPrototype);
     	$user = new User();
+    	
     	$user->exchangeArray($data);
     	$userTable = new UserTable($tableGateway);
     	$userTable->saveUser($user);
@@ -44,8 +45,8 @@ class IndexController extends AbstractActionController
     }
     public function processAction()
     {
-    //	$this->processAction()
-    	if ($this->request->isPost()) {
+    
+    	if (!$this->request->isPost()) {
     	
     		return $this->redirect()->toRoute(NULL ,array( 'controller' => 'Index',	'action' =>  'confirm'));
     	}
@@ -54,15 +55,23 @@ class IndexController extends AbstractActionController
    	//$viewModel  = new ViewModel();
    	//$viewModel=array('havij'=>'NOT POST');
    	//return $viewModel;
-   	return $this->redirect()->toRoute(NULL ,array( 'controller' => 'Index',	'action' =>  'index'));
-   //	$model = new ViewModel(array(
-   			
-   			// 				'error' => true,
-   			// 				'form'  => $form,
-   				//		'havij'=>'NOT POST',
-   				//	));
-   				//	$model->setTemplate('Form/index/index');
-   	//		 		return $model;
+    //	return $this->redirect()->toRoute(NULL ,array( 'controller' => 'Index',	'action' =>  'index'));
+   	$form = new RegisterForm();
+   
+   	$post = $this->request->getPost();
+   	$form->setData($post);
+   	if ($form->isValid())
+   	{
+   	$model = new ViewModel(array(
+   						'error' => true,
+   			 				'form'  => $form,
+   						'havij'=>$post->name,
+   					));
+   					$model->setTemplate('Form/index/index');
+   					
+   					$this->createUser($form->getData());
+   	}
+   					return $model;
    	//return array('havij'=>'NOT POST');
    	
    }

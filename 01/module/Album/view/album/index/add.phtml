@@ -1,28 +1,20 @@
+<strong>Module:</strong>        Album &raquo;
+<strong>Controller:</strong>    Index &raquo;
+<strong>Action:</strong>        add
 <?php 
-
+$title = 'Add new album';
+$this->headTitle($title);
 ?>
-<section class="register">
-<h2>Register</h2>
-<?php if ($this->error): ?>
-<p class="error">
-    There were one or more issues with your submission. 
-Please correct them as 
-    indicated below.
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
 
-    </p>
-<?php endif ?>
+$form->setAttribute('method', 'post');
+$form->setAttribute('action', $this->url(Null, array('controller'=>'index', 'action' => 'add')));
 
-<?php 
-//////////
-echo $this->havij;
-/////////	
-$form = $this->form;
-$form->setAttribute('action', $this->url(NULL,array('controller'=>'index', 'action' => 'process')));
-//$form->setAttribute('method', 'post');
 $form->prepare();
-echo $this->form()->openTag($form);
-?>
 
+ echo $this->form()->openTag($form);
+ ?>
 <dl class="zend_form">
 <dt><?php echo $this->formLabel($form->get('name')); ?></dt>
 <dd><?php 
@@ -42,5 +34,6 @@ echo $this->form()->openTag($form);
    
 ?></dd>
 </dl>
-<?php echo $this->form()->closeTag() ?>
-</section>
+<?php 
+ echo $this->form()->closeTag();
+?>
