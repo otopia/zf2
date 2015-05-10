@@ -53,7 +53,7 @@ class IndexController extends AbstractActionController
     }
     public function getAlbumTable()
     {
-       	if (!$this->albumTable) {
+    	if (!$this->albumTable) {
      	$sm = $this->getServiceLocator();
      	$this->albumTable = $sm->get('Album\Model\AlbumTable');
      	}

@@ -6,7 +6,7 @@ class Album2Form extends Form
 	public function __construct($name = null)
 	{
 		// we want to ignore the name passed
-		parent::__construct('album2');
+		parent::__construct('album3');
 		$this->setAttribute('method', 'post');
 		    $this->add(array(
         		'name' => 'code',
