@@ -30,25 +30,22 @@ class IndexController extends AbstractActionController
     {
     	
     
-    	//$sql=new Sql();
-    	//$sql->insert();
     	$adapter=new Adapter(array(
     			'driver' => 'Mysqli',
     			'database' => 'test',
     			'username' => 'root',
     			'password' => ''
     	));
-    	//$adapter->query("SELECT * FROM 'album'", array(5));
     	$sql = new Sql($adapter);
     	$table=new Album();
     	//$table->exchangeArray($data)
     	//$sql->//$adapter->query($sql)
-    	$select=$sql->select();
+    	$insert=$sql->insert('album2');
     	
     	//$insert->into("")
     	//new Select();
-    	$select->from('album');
-    	$statement = $sql->prepareStatementForSqlObject($select);
+    	$insert->values(array('alak'=>'vvv','code'=>'2313'));
+    	$statement = $sql->prepareStatementForSqlObject($insert);
     	$results = $statement->execute();
     	//$sql=new Sql($adapter);
     	//$sql->insert()
