@@ -12,6 +12,7 @@ namespace Havij\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Db\Sql\Select;
 use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Adapter\Driver\ResultInterface;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Adapter\Adapter;
 use Album2\Model\Album2Table;
@@ -34,14 +35,12 @@ class IndexController extends AbstractActionController
     			'driver' => 'Mysqli',
     			'database' => 'test',
     			'username' => 'root',
-    			'password' => ''
-    	));
+    			'password' => ''));
     	$sql = new Sql($adapter);
     	$table=new Album();
     	//$table->exchangeArray($data)
     	//$sql->//$adapter->query($sql)
     	$insert=$sql->insert('album2');
-    	
     	//$insert->into("")
     	//new Select();
     	$insert->values(array('alak'=>'vvv','code'=>'2313'));
@@ -53,10 +52,27 @@ class IndexController extends AbstractActionController
     	$code=$results->getFieldCount();
     	
     	return array('haha'=>$code);
-    	//$select->from('album')
-    	//->columns(array('album.*', 'a_name' => 'artist.name'))
-    	//->join('artist', 'album.artist_id' = 'artist.id');
+    }
+    public function showAction()
+    {
+    	 
+    
+    	$adapter=new Adapter(array(
+    			'driver' => 'PdoMysql',
+    			'database' => 'test',
+    			'username' => 'root',
+    			'password' => ''));
+    	$sql = new Sql($adapter);
+    	//$table=new Album();
+    	//$table->exchangeArray($data)
+    	//$sql->//$adapter->query($sql)
+		$select=$sql->select();
+    	$select->from('album2');
     	
+		$statement = $sql->prepareStatementForSqlObject($select);
+    	$results = $statement->execute();
+	   	return array('datatable'=>$results);
+      	 
     }
 
 
