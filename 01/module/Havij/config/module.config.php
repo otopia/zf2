@@ -9,15 +9,22 @@ return array(
         'routes' => array(
             'havij' => array(
                 'type'    => 'Literal',
+            		
                 'options' => array(
                     // Change this to something specific to your module
                     'route'    => '/Havij',
+                	'constraints' => array(
+                	'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                	'action' => 	'[a-zA-Z][a-zA-Z0-9_-]*',
+                	'id' => '[0-9]+',
+                		),
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
                         '__NAMESPACE__' => 'Havij\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
+                    		'id' => '[0-9]+',
                     ),
                 ),
                 'may_terminate' => true,

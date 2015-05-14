@@ -58,7 +58,7 @@ class IndexController extends AbstractActionController
     	 
     
     	$adapter=new Adapter(array(
-    			'driver' => 'PdoMysql',
+    			'driver' => 'mysqli',
     			'database' => 'test',
     			'username' => 'root',
     			'password' => ''));
@@ -73,6 +73,13 @@ class IndexController extends AbstractActionController
     	$results = $statement->execute();
 	   	return array('datatable'=>$results);
       	 
+    }
+    public function deleteAction()
+    {
+            	
+    	$id = $this->params()->fromRoute('delete', 0);
+    	return array('code'=>$id);
+    
     }
 
 
